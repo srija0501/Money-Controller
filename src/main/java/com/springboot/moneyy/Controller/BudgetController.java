@@ -26,11 +26,12 @@ public class BudgetController {
         return budgetService.createBudget(budget);
     }
 
-    // Update a budget
-    @PutMapping("/{id}")
-    public Budget updateBudget(@PathVariable Long id, @RequestBody Budget budget) {
-        return budgetService.updateBudget(id, budget);
-    }
+
+    @PutMapping("/update/{id}")
+public Budget updateBudget(@PathVariable Long id, @RequestBody Budget budget) {
+    return budgetService.updateBudget(id, budget);
+}
+
 
     // Delete a budget
     @DeleteMapping("/{id}")

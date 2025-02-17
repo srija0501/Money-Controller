@@ -12,9 +12,7 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    private String category;  // Ca
 
     private BigDecimal amount;
     private LocalDate startDate;
@@ -25,7 +23,7 @@ public class Budget {
     }
 
     // Constructor with fields
-    public Budget(Category category, BigDecimal amount, LocalDate startDate, LocalDate endDate) {
+    public Budget(String category, BigDecimal amount, LocalDate startDate, LocalDate endDate) {
         this.category = category;
         this.amount = amount;
         this.startDate = startDate;
@@ -41,11 +39,11 @@ public class Budget {
         this.id = id;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -77,7 +75,7 @@ public class Budget {
     public String toString() {
         return "Budget{" +
                 "id=" + id +
-                ", category=" + category.getName() +
+                ", category='" + category + '\'' +
                 ", amount=" + amount +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
