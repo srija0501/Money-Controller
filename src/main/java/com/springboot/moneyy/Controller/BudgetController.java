@@ -32,6 +32,12 @@ public Budget updateBudget(@PathVariable Long id, @RequestBody Budget budget) {
     return budgetService.updateBudget(id, budget);
 }
 
+         @GetMapping("/amount/{amount}")
+          public List<Budget> getBudgetsByAmount(@PathVariable Double amount) {
+                     return budgetService.getBudgetsByAmount(amount);
+}
+
+
 
     // Delete a budget
     @DeleteMapping("/{id}")

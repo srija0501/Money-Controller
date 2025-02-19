@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
-public class TransactionController {
+public class TransactionController { 
 
     @Autowired
     private TransactionService transactionService;
@@ -26,12 +26,28 @@ public class TransactionController {
         return transactionService.getTransactionsByUser(userId);
     }
 
-    // Create a new transaction
+   
+    @GetMapping("/sorted")
+    public List<Transaction> getAllTransactionsSortedByAmount() {
+        return transactionService.getAllTransactionsSortedByAmount();
+    }
+
+    
     @PostMapping("/add")
     public Transaction createTransaction(@RequestBody Transaction transaction) {
-        if (transaction.getUser() == null || transaction.getUser().getUserId() == null) {
-            throw new IllegalArgumentException("User ID is required in the request body.");
-        }
-        return transactionService.createTransaction(transaction.getUser().getUserId(), transaction);
+        return transactionService.createTransaction(transaction);
+    }
+
+    // Update an existing transaction
+    @PutMapping("/update/{id}")
+    public Transaction updateTransaction(@PathVariable Long id, @RequestBody Transaction transactionDetails) {
+        return transactionService.updateTransaction(id, transactionDetails);
+    }
+
+    // Delete a transaction
+    @DeleteMapping("/{id}")
+    public String deleteTransaction(@PathVariable Long id) {
+        transactionService.deleteTransaction(id);
+        return "Transaction deleted successfully!";
     }
 }

@@ -14,9 +14,8 @@ public class Income {
 
     private BigDecimal amount;
     private LocalDate date;
-    private String category;  // Category stored as a String
+    private String category; 
 
-    // Default constructor
     public Income() {
     }
 

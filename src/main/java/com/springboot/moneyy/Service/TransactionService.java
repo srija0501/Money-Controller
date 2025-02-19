@@ -1,11 +1,10 @@
 package com.springboot.moneyy.Service;
 
 import com.springboot.moneyy.Entity.Transaction;
-import com.springboot.moneyy.Entity.User;
 import com.springboot.moneyy.Repository.TransactionRepository;
-import com.springboot.moneyy.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -16,23 +15,60 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
+    // Get all transactions
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
     }
 
+    // Get transactions for a specific user
     public List<Transaction> getTransactionsByUser(Long userId) {
-        return transactionRepository.findByUserUserId(userId);
+        return transactionRepository.findByUserId(userId);
+    }
+       
+
+    public List<Transaction> getAllTransactionsSortedByAmount() {
+        return transactionRepository.findAllByOrderByAmountAsc();
     }
 
-    public Transaction createTransaction(Long userId, Transaction transaction) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found with ID: " + userId);
+    // Create a new transaction
+    public Transaction createTransaction(Transaction transaction) {
+        if (transaction.getUserId() == null) {
+            throw new IllegalArgumentException("User ID is required");
         }
-        transaction.setUser(userOptional.get());
         return transactionRepository.save(transaction);
+    }
+
+    // Update an existing transaction
+    public Transaction updateTransaction(Long id, Transaction transactionDetails) {
+        // Check if the transaction exists by ID
+        Optional<Transaction> optionalTransaction = transactionRepository.findById(id);
+        if (optionalTransaction.isEmpty()) {
+            throw new RuntimeException("Transaction not found with id: " + id);
+        }
+
+        // Get the existing transaction
+        Transaction transaction = optionalTransaction.get();
+
+        // Update transaction fields with new data
+        transaction.setAmount(transactionDetails.getAmount());
+        transaction.setDate(transactionDetails.getDate());
+        transaction.setDescription(transactionDetails.getDescription());
+        transaction.setCategory(transactionDetails.getCategory());
+        transaction.setUserId(transactionDetails.getUserId());
+
+        // Save and return updated transaction
+        return transactionRepository.save(transaction);
+    }
+
+    
+    public void deleteTransaction(Long id) {
+      
+        Optional<Transaction> optionalTransaction = transactionRepository.findById(id);
+        if (optionalTransaction.isEmpty()) {
+            throw new RuntimeException("Transaction not found with id: " + id);
+        }
+
+        
+        transactionRepository.deleteById(id);
     }
 }

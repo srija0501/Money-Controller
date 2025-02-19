@@ -1,7 +1,6 @@
 package com.springboot.moneyy.Entity;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 public class User {
@@ -12,17 +11,15 @@ public class User {
 
     private String name;
     private String email;
+    private String password; // Added password field
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Transaction> transactions;
-
-    // Constructors
     public User() {
     }
 
-    public User(String name, String email) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 
     // Getters and Setters
@@ -50,11 +47,11 @@ public class User {
         this.email = email;
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

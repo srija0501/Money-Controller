@@ -8,25 +8,26 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;  // Primary Key
 
-    private Double amount;
-    private LocalDate date;
-    private String description;
+    private Double amount;  // Transaction Amount
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private LocalDate date;  // Transaction Date
 
-    // Constructors
-    public Transaction() {
-    }
+    private String description;  // Transaction Description
 
-    public Transaction(Double amount, LocalDate date, String description, User user) {
+    private String category;  // New Category Field
+
+    private Long userId;  // Storing user ID directly (No relationship)
+
+    public Transaction() {}
+
+    public Transaction(Double amount, LocalDate date, String description, String category, Long userId) {
         this.amount = amount;
         this.date = date;
         this.description = description;
-        this.user = user;
+        this.category = category;
+        this.userId = userId;
     }
 
     // Getters and Setters
@@ -62,11 +63,19 @@ public class Transaction {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
+    public String getCategory() {
+        return category;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

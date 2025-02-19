@@ -3,6 +3,7 @@ package com.springboot.moneyy.Service;
 import com.springboot.moneyy.Entity.Budget;
 import com.springboot.moneyy.Repository.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,11 @@ public class BudgetService {
         return budgetRepository.findAll();
     }
 
-    // Create a new budget
+    public List<Budget> getBudgetsByAmount(Double amount) {
+        return budgetRepository.findBudgetsByAmountGreaterThanEqual(amount);
+    }
+    
+
     public Budget createBudget(Budget budget) {
         return budgetRepository.save(budget);
     }

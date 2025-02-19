@@ -12,17 +12,17 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String category;  // Ca
+    private String category;  
 
     private BigDecimal amount;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    // Default constructor
+    
     public Budget() {
     }
 
-    // Constructor with fields
+  
     public Budget(String category, BigDecimal amount, LocalDate startDate, LocalDate endDate) {
         this.category = category;
         this.amount = amount;
@@ -30,7 +30,6 @@ public class Budget {
         this.endDate = endDate;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
