@@ -1,8 +1,10 @@
 package com.springboot.moneyy.Controller;
 
 import com.springboot.moneyy.Entity.Transaction;
+import com.springboot.moneyy.Entity.User;
 import com.springboot.moneyy.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,13 @@ public class TransactionController {
     public List<Transaction> getTransactionsByUser(@PathVariable Long userId) {
         return transactionService.getTransactionsByUser(userId);
     }
-
+          
+    @GetMapping("/page")
+    public Page<Transaction> getAllTransactions(@RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "10") int size) {
+        return transactionService.getAllTransactions(page, size);
+    }
+    
    
     @GetMapping("/sorted")
     public List<Transaction> getAllTransactionsSortedByAmount() {

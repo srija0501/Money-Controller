@@ -19,14 +19,14 @@ public class Income {
     public Income() {
     }
 
-    // Constructor with fields
+    
     public Income(BigDecimal amount, LocalDate date, String category) {
         this.amount = amount;
         this.date = date;
         this.category = category;
     }
 
-    // Getters and Setters
+    
     public Long getId() {
         return id;
     }

@@ -44,6 +44,9 @@ public class GoalService {
         goal.setId(id); // Set the ID to preserve the goal's identity
         return goalRepository.save(goal);
     }
+    public List<Goal> getAllGoalsSortedByTargetAmountDesc() {
+        return goalRepository.findAllByOrderByTargetAmountDesc();
+    }
 
     // Delete goal by ID
     public void deleteGoal(Long id) {

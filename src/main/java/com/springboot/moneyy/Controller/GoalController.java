@@ -37,6 +37,10 @@ public class GoalController {
     public Goal updateGoal(@PathVariable Long id, @RequestBody Goal goal) {
         return goalService.updateGoal(id, goal);
     }
+    @GetMapping("/sorted/desc")
+    public List<Goal> getGoalsSortedByTargetAmountDesc() {
+        return goalService.getAllGoalsSortedByTargetAmountDesc();
+    }
 
     // Delete a goal by ID
     @DeleteMapping("/delete/{id}")

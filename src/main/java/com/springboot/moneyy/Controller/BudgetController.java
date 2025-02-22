@@ -14,13 +14,13 @@ public class BudgetController {
     @Autowired
     private BudgetService budgetService;
 
-    // Get all budgets
+    
     @GetMapping
     public List<Budget> getAllBudgets() {
         return budgetService.getAllBudgets();
     }
 
-    // Create a new budget
+   
     @PostMapping("/add")
     public Budget createBudget(@RequestBody Budget budget) {
         return budgetService.createBudget(budget);

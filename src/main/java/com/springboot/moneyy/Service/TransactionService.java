@@ -1,8 +1,11 @@
 package com.springboot.moneyy.Service;
 
 import com.springboot.moneyy.Entity.Transaction;
+import com.springboot.moneyy.Entity.User;
 import com.springboot.moneyy.Repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 
@@ -59,7 +62,11 @@ public class TransactionService {
         // Save and return updated transaction
         return transactionRepository.save(transaction);
     }
-
+ 
+    public Page<Transaction> getAllTransactions(int page, int size) {
+        return transactionRepository.findAll(PageRequest.of(page, size));
+    }
+    
     
     public void deleteTransaction(Long id) {
       

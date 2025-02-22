@@ -17,11 +17,10 @@ public class Goal {
     private BigDecimal currentAmount;
     private LocalDate deadline;
 
-    // Default constructor
     public Goal() {
     }
 
-    // Constructor with fields
+    
     public Goal(String goalName, BigDecimal targetAmount, BigDecimal currentAmount, LocalDate deadline) {
         this.goalName = goalName;
         this.targetAmount = targetAmount;

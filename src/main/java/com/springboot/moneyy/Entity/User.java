@@ -7,11 +7,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId; // Ensure this matches with Transaction
+    private Long userId; 
 
     private String name;
     private String email;
-    private String password; // Added password field
+    private String password; 
 
     public User() {
     }
@@ -22,7 +22,7 @@ public class User {
         this.password = password;
     }
 
-    // Getters and Setters
+    
     public Long getUserId() {
         return userId;
     }

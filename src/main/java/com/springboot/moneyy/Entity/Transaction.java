@@ -8,18 +8,17 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // Primary Key
+    private Long id;  
 
-    private Double amount;  // Transaction Amount
+    private Double amount;  
 
-    private LocalDate date;  // Transaction Date
+    private LocalDate date;  
 
-    private String description;  // Transaction Description
+    private String description; 
 
-    private String category;  // New Category Field
+    private String category;  
 
-    private Long userId;  // Storing user ID directly (No relationship)
-
+    private Long userId;  
     public Transaction() {}
 
     public Transaction(Double amount, LocalDate date, String description, String category, Long userId) {
@@ -30,7 +29,7 @@ public class Transaction {
         this.userId = userId;
     }
 
-    // Getters and Setters
+  
     public Long getId() {
         return id;
     }
