@@ -14,12 +14,11 @@ public class GoalService {
     @Autowired
     private GoalRepository goalRepository;
 
-    // Create a new goal
     public Goal createGoal(Goal goal) {
         return goalRepository.save(goal);
     }
 
-    // Get all goals
+   
     public List<Goal> getAllGoals() {
         return goalRepository.findAll();
     }
@@ -34,21 +33,21 @@ public class GoalService {
         }
     }
 
-    // Update an existing goal
+   
     public Goal updateGoal(Long id, Goal goal) {
         // Check if goal exists
         if (!goalRepository.existsById(id)) {
             throw new RuntimeException("Goal not found with ID: " + id);
         }
 
-        goal.setId(id); // Set the ID to preserve the goal's identity
+        goal.setId(id); 
         return goalRepository.save(goal);
     }
+
     public List<Goal> getAllGoalsSortedByTargetAmountDesc() {
         return goalRepository.findAllByOrderByTargetAmountDesc();
     }
 
-    // Delete goal by ID
     public void deleteGoal(Long id) {
         if (!goalRepository.existsById(id)) {
             throw new RuntimeException("Goal not found with ID: " + id);

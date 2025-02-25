@@ -1,7 +1,7 @@
 package com.springboot.moneyy.Controller;
 
 import com.springboot.moneyy.Entity.Transaction;
-import com.springboot.moneyy.Entity.User;
+
 import com.springboot.moneyy.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

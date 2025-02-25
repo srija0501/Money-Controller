@@ -3,7 +3,8 @@ package com.springboot.moneyy.Service;
 import com.springboot.moneyy.Entity.Budget;
 import com.springboot.moneyy.Repository.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,20 +28,23 @@ public class BudgetService {
     public Budget createBudget(Budget budget) {
         return budgetRepository.save(budget);
     }
-
-    // Update an existing budget
+   
     public Budget updateBudget(Long id, Budget updatedBudget) {
-        Budget existingBudget = budgetRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Budget not found"));
-        
-        existingBudget.setAmount(updatedBudget.getAmount());
-        existingBudget.setStartDate(updatedBudget.getStartDate());
-        existingBudget.setEndDate(updatedBudget.getEndDate());
-
-        return budgetRepository.save(existingBudget);
+             updatedBudget.setId(id);
+             return budgetRepository.save(updatedBudget);
     }
 
-    // Delete a budget
+    public Page<Budget> getAllBudgets(Pageable pageable) {
+        return budgetRepository.findAll(pageable);
+    }
+
+    public List<Budget> getBudgetsByCategory(String category) {
+        return budgetRepository.findByCategory(category);
+    }
+
+    
+    
+
     public void deleteBudget(Long id) {
         budgetRepository.deleteById(id);
     }

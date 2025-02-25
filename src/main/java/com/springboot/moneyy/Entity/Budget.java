@@ -13,10 +13,11 @@ public class Budget {
     private Long id;
 
     private String category;  
-
+    
     private BigDecimal amount;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String type;
 
     
     public Budget() {
@@ -68,6 +69,13 @@ public class Budget {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+    public String gettype() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

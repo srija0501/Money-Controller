@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BudgetRepository extends JpaRepository<Budget, Long> {
+
+    List<Budget> findByCategory(String category);
+ 
+
+
     @Query("SELECT b FROM Budget b WHERE b.amount >= :amount ORDER BY b.amount ASC")
     List<Budget> findBudgetsByAmountGreaterThanEqual(@Param("amount") Double amount);
 }

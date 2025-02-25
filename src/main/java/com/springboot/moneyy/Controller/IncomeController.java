@@ -15,19 +15,19 @@ public class IncomeController {
     @Autowired
     private IncomeService incomeService;
 
-    // Get all incomes
+    
     @GetMapping
     public List<Income> getAllIncomes() {
         return incomeService.getAllIncomes();
     }
 
-    // Get income by ID
+
     @GetMapping("/{id}")
     public Optional<Income> getIncomeById(@PathVariable Long id) {
         return incomeService.getIncomeById(id);
     }
 
-    // Get incomes by category
+   
     @GetMapping("/category/{category}")
     public List<Income> getIncomesByCategory(@PathVariable String category) {
         return incomeService.getIncomesByCategory(category);
