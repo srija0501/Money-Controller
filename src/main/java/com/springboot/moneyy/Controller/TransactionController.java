@@ -1,13 +1,15 @@
+
 package com.springboot.moneyy.Controller;
 
 import com.springboot.moneyy.Entity.Transaction;
-
+import com.springboot.moneyy.Entity.User;
 import com.springboot.moneyy.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/transactions")
@@ -26,6 +28,10 @@ public class TransactionController {
     @GetMapping("/user/{userId}")
     public List<Transaction> getTransactionsByUser(@PathVariable Long userId) {
         return transactionService.getTransactionsByUser(userId);
+    }
+    @GetMapping("/{id}")
+    public Transaction getTransactionById(@PathVariable Long id) {
+        return transactionService.getTransactionById(id);
     }
           
     @GetMapping("/page")

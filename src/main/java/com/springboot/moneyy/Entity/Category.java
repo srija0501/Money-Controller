@@ -1,28 +1,47 @@
 package com.springboot.moneyy.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "category")  
+@Table(name = "categories")
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)  
     private String name;
+    private String type;
 
-    
-    public Category() {
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Transaction> transactions = new ArrayList<>();
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-  
-    public Category(String name) {
+    public void setTransactions(List<Transaction> transactions) {
+        for (Transaction trans : transactions) {
+            trans.setCategory(this); // Ensures bidirectional relationship
+        }
+        this.transactions = transactions;
+    }
+
+    // Constructors
+    public Category() {}
+
+    public Category(String name, String type) {
         this.name = name;
+        this.type = type;
     }
 
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -37,5 +56,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -1,9 +1,11 @@
 package com.springboot.moneyy.Service;
 
 import com.springboot.moneyy.Entity.Budget;
+import com.springboot.moneyy.Entity.Transaction;
 import com.springboot.moneyy.Repository.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class BudgetService {
     @Autowired
     private BudgetRepository budgetRepository;
 
-    // Get all budgets
+    
     public List<Budget> getAllBudgets() {
         return budgetRepository.findAll();
     }
@@ -41,8 +43,11 @@ public class BudgetService {
     public List<Budget> getBudgetsByCategory(String category) {
         return budgetRepository.findByCategory(category);
     }
+ 
+        public Page<Budget> getAllBudgets(int page, int size) {
+        return budgetRepository.findAll(PageRequest.of(page, size));
+    }
 
-    
     
 
     public void deleteBudget(Long id) {

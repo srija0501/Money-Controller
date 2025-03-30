@@ -1,6 +1,7 @@
 package com.springboot.moneyy.Controller;
 
 import com.springboot.moneyy.Entity.Budget;
+import com.springboot.moneyy.Entity.Transaction;
 import com.springboot.moneyy.Service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,13 +32,22 @@ public class BudgetController {
         return budgetService.getAllBudgets(pageable);
     }
 
+    //RequestParam
+      @GetMapping("/page")
+    public Page<Budget> getAllBudgets(@RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "3") int size) {
+        return budgetService.getAllBudgets(page, size);
+    }
+
+
+
     //  Get budgets by category
     @GetMapping("/category/{category}")
     public List<Budget> getBudgetsByCategory(@PathVariable String category) {
         return budgetService.getBudgetsByCategory(category);
     }
 
-    //  Create a new budget
+    //  Create a new budget 
     @PostMapping("/add")
     public Budget createBudget(@RequestBody Budget budget) {
         return budgetService.createBudget(budget);

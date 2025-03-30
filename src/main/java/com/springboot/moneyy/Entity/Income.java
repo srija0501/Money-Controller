@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "incomes")
 public class Income {
@@ -16,17 +18,30 @@ public class Income {
     private LocalDate date;
     private String category; 
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    @JsonBackReference
+    private User user;
+
     public Income() {
     }
 
     
-    public Income(BigDecimal amount, LocalDate date, String category) {
+    public Income(BigDecimal amount, LocalDate date, String category,User user) {
         this.amount = amount;
         this.date = date;
         this.category = category;
+        this.user=user;
     }
 
-    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

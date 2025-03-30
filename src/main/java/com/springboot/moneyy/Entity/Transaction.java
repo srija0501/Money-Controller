@@ -1,7 +1,10 @@
+
 package com.springboot.moneyy.Entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Transaction {
@@ -16,19 +19,35 @@ public class Transaction {
 
     private String description; 
 
-    private String category;  
+    
 
     private Long userId;  
+
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="category_id")
+    @JsonBackReference
+   
+    private Category category;
+
+    
+
     public Transaction() {}
 
-    public Transaction(Double amount, LocalDate date, String description, String category, Long userId) {
+    public Transaction(Double amount, LocalDate date, String description, Long userId) {
         this.amount = amount;
         this.date = date;
         this.description = description;
-        this.category = category;
         this.userId = userId;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void  setCategory (Category category) {
+        this.category = category;
+    }
   
     public Long getId() {
         return id;
@@ -62,13 +81,6 @@ public class Transaction {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public Long getUserId() {
         return userId;

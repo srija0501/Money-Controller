@@ -1,6 +1,7 @@
 package com.springboot.moneyy.Controller;
 
 import com.springboot.moneyy.Entity.User;
+import com.springboot.moneyy.Entity.Income;
 import com.springboot.moneyy.Service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,17 @@ public class UserController {
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "User deleted successfully!";
+    }
+
+    // ✅ Get all incomes of a user
+    @GetMapping("/{userId}/incomes")
+    public List<Income> getUserIncomes(@PathVariable Long userId) {
+        return userService.getUserIncomes(userId);
+    }
+
+    // ✅ Add income to a user
+    @PostMapping("/{userId}/incomes")
+    public Income addIncomeToUser(@PathVariable Long userId, @RequestBody Income income) {
+        return userService.addIncomeToUser(userId, income);
     }
 }
